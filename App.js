@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StyleSheet, Text, View, FlatList } from "react-native";
+import { StyleSheet, Text, View, FlatList, SafeAreaView, StatusBar } from "react-native";
 import AddTodo from "./Components/addList";
 import TodoItem from "./Components/TodoItem";
 
@@ -21,22 +21,24 @@ export default function App() {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.navBar}>
-        <Text style={styles.navBarHeading}>ToDo List</Text>
-      </View>
-      <View style={styles.content}>
-        <AddTodo submitHandler={submitHandler} />
-        <View style={styles.list}>
-          <FlatList
-            data={todos}
-            renderItem={({ item }) => (
-              <TodoItem item={item} pressHandler={pressHandler} />
-            )}
-          />
+    <SafeAreaView style={{marginTop: StatusBar.currentHeight, flex:1}}>
+      <View style={styles.container}>
+        <View style={styles.navBar}>
+          <Text style={styles.navBarHeading}>ToDo List</Text>
+        </View>
+        <View style={styles.content}>
+          <AddTodo submitHandler={submitHandler} />
+          <View style={styles.list}>
+            <FlatList
+              data={todos}
+              renderItem={({ item }) => (
+                <TodoItem item={item} pressHandler={pressHandler} />
+              )}
+            />
+          </View>
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
